@@ -4,11 +4,8 @@ from account import Account
 import random
 
 
-acc = Account()
 
 def run():
-    
-    acc.load()
     view.welcome_menu()
     main_menu()
 
@@ -18,73 +15,80 @@ def main_menu():
         selection = view.choice()
         
         if selection == "1":
-
-            create_account()
             print()
+            # create_account()
 
         elif selection == "2":
             login()
 
         elif selection == "3" :
+
             return
 
 def login():
     account_number = view.account_number()
-    if acc.validate() == True:
-
-        menu(account_number)
-    else:
-        print("wrong pin")
-        main_menu()
-
-
-
-
-
-def menu(account_number):
-    while True:
-        first_name = acc.get_f_name(account_number)
-        last_name = acc.get_l_name(account_number)
-        view.main_menu(account_number, first_name, last_name)
-        selection = view.choice()
-
-        if selection == "1":
-            acc.get_balance(account_number)
-
-        elif selection == "2":
-            witdraw = float(view.withdraw())
-            acc.withdraw(witdraw)
-            # money_left = model.balance(account_number)
-            
-            # acc.save()
-            # if money_left < 0:
-            #     view.insuf()
-
-        elif selection == "3":
-            amount = float(view.deposit())
-            acc.deposit(amount)
-            acc.save()
-        elif selection == "4":
-            acc.save()
-            return
-        
-
-def create_account():
-    first_name = view.get_f_name()
-    last_name = view.get_l_name()
     pin = view.get_pin()
-    confirm_pin = view.pin_confirm(pin)
-    if confirm_pin != pin:
-        print("wrong pin")
-        create_account()
+    the_acc = Account()
+    the_acc.pin = pin
+    the_acc.account_num = account_number
+
+    if the_acc.validate() == True:
+        the_acc.load(account_number)
+        print(data[the_acc.account_num]["first Name"])
+        # menu(the_acc)
     else:
-        account_number = "N4321" + str(random.randint(100, 1000))
-        
-        acc.new_account(account_number, first_name, last_name, pin)
-        acc.save()
-        view.new_account(account_number)
-        view.welcome_menu()
+        print("wrong pin")
         main_menu()
+
+
+
+
+
+# def menu(the_acc):
+#     print(data[])
+#     while True:
+#         view.main_menu(the_, first_name, last_name)
+#         selection = view.choice()
+
+#         if selection == "1":
+#             print(account.get_balance(account_number))
+
+#         elif selection == "2":
+#             witdraw = float(view.withdraw())
+#             account.withdraw(witdraw)
+#             # money_left = model.balance(account_number)
+            
+#             # acc.save()
+#             # if money_left < 0:
+#             #     view.insuf()
+
+#         elif selection == "3":
+#             amount = float(view.deposit())
+#             account.deposit(amount)
+
+#             account.save()
+#         elif selection == "4":
+            
+#             account.save()
+#             return
+        
+
+# def create_account():
+#     first_name = view.get_f_name()
+#     last_name = view.get_l_name()
+#     pin = view.get_pin()
+#     confirm_pin = view.pin_confirm(pin)
+#     if confirm_pin != pin:
+#         print("wrong pin")
+#         create_account()
+#     else:
+#         account_number = "N4321" + str(random.randint(100, 1000))
+#         new_acc = Account()
+#         new_acc.new_account(account_number, first_name, last_name, pin)
+#         acc.save()
+#         view.new_account(account_number)
+#         view.welcome_menu()
+#         main_menu()
 
 
 

@@ -12,7 +12,7 @@ class Account:
     data_path = DATAPATH
     data = {}
 
-    def __init__(self, first_name='', last_name='', account_num="", pin="", balance=""):
+    def __init__(self, first_name="", last_name="", account_num="", pin="", balance=0):
         self.account_num = account_num
         self.pin = pin
         self.balance = balance
@@ -23,7 +23,7 @@ class Account:
         with open(self.data_path, 'r') as file_object:
             data = json.load(file_object)
             if self.account_num in data:
-                if data[self.account_num]["pin"] == self.pin:
+                if data[self.account_num]["PIN"] == self.pin:
                     return True
             return False
 
@@ -36,26 +36,14 @@ class Account:
         self.data[account_number]["balance"] = 0
 
 
-
-    def get_balance(self, account_num):
+    def load(self, account_num):
         with open(self.data_path, 'r') as file_object:
             data = json.load(file_object)
-            return data[self.account_num]["balance"]
+            data[self.account_num]["Last Name"]
+            data[self.account_num]["first Name"] 
+            data[self.account_num]["balance"]
+            data[self.account_num]["PIN"]
 
-    def get_f_name(self, account_num):
-        with open(self.data_path, 'r') as file_object:
-            data = json.load(file_object)
-            return data[self.account_num]["first Name"]
-
-    def get_l_name(self, account_num):
-        with open(self.data_path, 'r') as file_object:
-            data = json.load(file_object)
-            return data[self.account_num]["first Name"]
-            
-
-    def load(self):
-        with open(self.data_path, 'r') as file_object:
-            data = json.load(file_object)
             # my_data = data[self.account_num]
             # self.balance = my_data['balance']
         # load the account with this object's self.account_num
@@ -65,6 +53,8 @@ class Account:
         #     user.load()
         # else:
         #     raise AuthenticationError
+
+
 
     def save(self):
         with open(self.data_path, 'w') as json_file:
